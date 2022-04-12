@@ -58,7 +58,6 @@ public class EmployeeStreamTest {
 
 	@Test
 	public void streamCollect() {
-
 		List<Integer> intList = new LinkedList<>();
 
 		for (int i = 0; i < 5; i++) {
