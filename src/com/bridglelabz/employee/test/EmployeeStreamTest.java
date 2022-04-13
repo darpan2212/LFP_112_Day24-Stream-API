@@ -1,5 +1,6 @@
 package com.bridglelabz.employee.test;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -97,7 +98,7 @@ public class EmployeeStreamTest {
 				.forEach(System.out::println);
 	}
 
-	@Test
+//	@Test
 	public void streamFindFirst() {
 		List<Integer> intList = new LinkedList<>();
 
@@ -112,10 +113,33 @@ public class EmployeeStreamTest {
 
 		Stream<Integer> stream = intList.stream();
 
-		int a = stream.filter(n -> checkPrime(n))
+		int firstNum = stream.filter(n -> checkPrime(n))
 				.findFirst().get();
 
-		System.out.println("First prime number is : " + a);
+		System.out.println(
+				"First prime number is : " + firstNum);
+	}
+
+	@Test
+	public void streamMinMax() {
+		List<Integer> intList = new LinkedList<>();
+
+		for (int i = 0; i < 5; i++) {
+			int num = (int) (Math.random() * 90 + 10);
+			intList.add(num);
+		}
+		System.out.println(intList);
+
+		int minNum = intList.stream().filter(n -> n % 2 == 0)
+				.min(Comparator.comparing(n -> n)).get();
+
+		int maxNum = intList.stream()
+				.filter(n -> n % 2 == 0)
+				.max(Comparator.comparing(n -> n)).get();
+
+		System.out.println("Minimum even is : " + minNum);
+		System.out.println("Maximum even is : " + maxNum);
+
 	}
 
 	public boolean checkPrime(int n) {
