@@ -87,7 +87,7 @@ public class EmployeeData {
 		emp3.setSalary(
 				Double.parseDouble(df.format(salary)));
 		builder.accept(emp3);
-		
+
 		Stream<Employee> stream4 = builder.build();
 	}
 }
