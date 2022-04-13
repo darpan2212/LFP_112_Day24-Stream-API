@@ -1,13 +1,11 @@
 package com.bridglelabz.employee.test;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -144,7 +142,7 @@ public class EmployeeStreamTest {
 
 	}
 
-	@Test
+//	@Test
 	public void streamReduce() {
 		List<Integer> intList = new LinkedList<>();
 
@@ -156,12 +154,51 @@ public class EmployeeStreamTest {
 
 		int sum = intList.stream()
 				.reduce((n1, n2) -> n1 + n2).get();
-		
+
 		int count = (int) intList.stream().count();
-		double avg = (double)sum / count;
+		double avg = (double) sum / count;
 		System.out.println(sum);
 		System.out.println(avg);
 
+	}
+
+	@Test
+	public void streamMatch() {
+		List<Integer> intList = new LinkedList<>();
+
+		for (int i = 0; i < 5; i++) {
+			int num = (int) (Math.random() * 90 + 10);
+			intList.add(num);
+		}
+		System.out.println(intList);
+
+		System.out.println("All even : "+intList.stream().allMatch(n -> n % 2 == 0));
+		System.out.println("Any one even : "+intList.stream().anyMatch(n -> n % 2 == 0));
+		System.out.println("None even : "+intList.stream().noneMatch(n -> n % 2 == 0));
+		/*
+		 * if (intList.stream().allMatch(n -> n % 2 == 0)) {
+		 * System.out.println("All the numbers are even"); } else { if (intList.stream()
+		 * .anyMatch(n -> n % 2 == 0)) { System.out.println(
+		 * "There are some even numbers in list"); } else { System.out.println(
+		 * "There is no even number in list"); } }
+		 */
+	}
+
+	@Test
+	public void streamSort() {
+		List<Integer> intList = new LinkedList<>();
+
+		for (int i = 0; i < 5; i++) {
+			int num = (int) (Math.random() * 90 + 10);
+			intList.add(num);
+		}
+		System.out.println(intList);
+
+		List<Integer> sortedList = intList.stream()
+				.sorted((n1, n2) -> n1.compareTo(n2))
+				.collect(Collectors.toList());
+		
+		System.out.println(sortedList);
 	}
 
 	public boolean checkPrime(int n) {
